@@ -10,8 +10,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Wings of Power",
-  description: "Wings of Power",
+  title: "BetSocial",
+  description: "Peer-to-peer prediction & matched betting",
 };
 
 export default function RootLayout({

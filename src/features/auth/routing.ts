@@ -6,7 +6,9 @@ export type StaffDestination =
   | "/";
 
 export function userHome(role: string | null | undefined): string {
-  if (role === "ADMIN") return "/admin";
+  // BetSocial admin controls live on the markets home feed.
+  // `/admin` is leftover school boilerplate (Wings of Power) — do not use it.
+  void role;
   return "/";
 }
 

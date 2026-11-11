@@ -14,7 +14,7 @@ export function DashboardGuard({ children }: { children: React.ReactNode }) {
     session.status === "loading"
       ? null
       : dashboardRedirect({
-          role: session.user?.role ?? null,
+          role: session.user?.role ?? session.user?.type ?? null,
           pathname,
         });
 
@@ -23,6 +23,11 @@ export function DashboardGuard({ children }: { children: React.ReactNode }) {
   }, [destination, router]);
 
   if (session.status === "loading" || destination) return null;
+
+  // BetSocial profile pages should not use the leftover school dashboard chrome.
+  const isProfile =
+    pathname === "/profile" || pathname.startsWith("/profile/");
+  if (isProfile) return <>{children}</>;
 
   return <DashboardShell>{children}</DashboardShell>;
 }

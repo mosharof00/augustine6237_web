@@ -20,10 +20,18 @@ describe("dashboardRedirect", () => {
     ).toBe("/admin");
   });
 
-  it("sends any other role to sign-in and leaves a matching role in place", () => {
-    expect(dashboardRedirect({ role: "STUDENT", pathname: "/admin" })).toBe(
+  it("sends non-staff away from school dashboards and leaves staff in place", () => {
+    expect(dashboardRedirect({ role: "CLIENT", pathname: "/admin" })).toBe("/");
+    expect(dashboardRedirect({ role: "ADMIN", pathname: "/admin" })).toBeNull();
+  });
+
+  it("allows any signed-in role onto profile routes", () => {
+    expect(dashboardRedirect({ role: "CLIENT", pathname: "/profile" })).toBeNull();
+    expect(
+      dashboardRedirect({ role: "CLIENT", pathname: "/profile/abc" }),
+    ).toBeNull();
+    expect(dashboardRedirect({ role: null, pathname: "/profile" })).toBe(
       "/sign-in",
     );
-    expect(dashboardRedirect({ role: "ADMIN", pathname: "/admin" })).toBeNull();
   });
 });
