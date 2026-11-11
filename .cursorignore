@@ -1,0 +1,7 @@
+# wings_of_power_dashboard — Cursor index exclusions
+.next/**
+node_modules/**
+package-lock.json
+coverage/**
+*.lock
+
